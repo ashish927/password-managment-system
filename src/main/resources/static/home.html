@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>
+        Home
+    </title>
+    <script type="text/javascript" src="RestCall.js">
+
+    </script>
+    <style type="text/css">
+        .outer {
+    background-color:#808080; width: 50%; height: 90%;margin-left: 25%; margin-top: 0%; padding-top: 10px; padding-bottom: 0px;
+
+    border: 7px solid gray;
+}
+
+.inner {
+    background-color:#cdcdcd; width: 99%; height: 99%;
+    border: 1px solid gray;
+    position: relative;
+
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #808080;
+  color: black;
+}
+    </style>
+</head>
+<body onload="getAllData()">
+<div class="outer" id="main" align="center" >
+    <div class="inner">
+        <h1 style="font-family:Comic Sans Ms;font-size:20pt;" align="center">
+            Web Based Password Manager
+        </h1>
+        <p>
+            <a href="">Edit</a> &nbsp;&nbsp;&nbsp;
+            <a href="">Delete</a>&nbsp;&nbsp;&nbsp;
+            <a href="generatepassword.html">Generate new password</a>
+        </p>
+
+        <div id="dvTable" align="center">
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
