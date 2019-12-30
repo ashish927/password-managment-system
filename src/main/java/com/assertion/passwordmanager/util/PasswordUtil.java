@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class PasswordUtil {
     private static final String key = "aesEncryptionKey";
     private static final String initVector = "encryptionIntVec";
+    private static final int OFFSET = "AAAAAAA".hashCode();
     static Map<String, String> map ;
     static Set<String> keySet ;
 
@@ -59,13 +60,13 @@ public class PasswordUtil {
                 sb.setCharAt(i, sb.charAt(i));
             }
         }
-        storage.put(sb.toString(), valueTrack);
+        storage.put(getStringForHashCode(sb.toString().hashCode()), valueTrack);
         return sb.toString();
     }
 
     public static String createDecodedPasswordString(String input) {
         String pass = input;
-        Map<Integer, String> valueTrack = storage.get(input);
+        Map<Integer, String> valueTrack = storage.get(getStringForHashCode(pass.hashCode()));
         Set trackMapKey = valueTrack.keySet();
         StringBuilder sb = new StringBuilder(pass);
         for (int i = 0; i < pass.length(); i++) {
@@ -111,4 +112,16 @@ public class PasswordUtil {
         return null;
     }
 
+    private static String getStringForHashCode(int hash) {
+        hash -= OFFSET;
+        long longHash = (long) hash & 0xFFFFFFFFL;
+
+        char[] c = new char[7];
+        for (int i = 0; i < 7; i++)
+        {
+            c[6 - i] = (char) ('A' + (longHash % 31));
+            longHash /= 31;
+        }
+        return new String(c);
+    }
 }
